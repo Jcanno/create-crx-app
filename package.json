@@ -7,17 +7,23 @@
   "engines": {
     "node": ">=12.0.0"
   },
+  "bin": {
+    "create-crx-app": "./dist/index.js"
+  },
   "devDependencies": {
     "@types/prompts": "^2.0.14",
+    "@types/semver": "^7.3.8",
     "@types/validate-npm-package-name": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "chalk": "^4.1.1",
     "commander": "^8.1.0",
     "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
     "prompts": "^2.4.1",
+    "semver": "^7.3.5",
     "typescript": "^4.3.5",
     "validate-npm-package-name": "^3.0.0"
   }
