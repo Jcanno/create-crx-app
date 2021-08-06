@@ -7,9 +7,9 @@ import path from 'path'
 import { validateNpmName } from './uitl/validate-pkg'
 
 const currentNodeVersion = process.versions.node
-const requeireVersion = packageJson.engines.node
+const requireVersion = packageJson.engines.node
 
-if (!Semver.satisfies(currentNodeVersion, requeireVersion)) {
+if (!Semver.satisfies(currentNodeVersion, requireVersion)) {
   console.error(
     'You are running Node ' +
       currentNodeVersion +
