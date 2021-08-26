@@ -1,20 +1,21 @@
 import packageJson from '../package.json'
-import Semver from 'semver'
+import semver from 'semver'
 import Commander from 'commander'
 import chalk from 'chalk'
 import prompts from 'prompts'
 import path from 'path'
-import { validateNpmName } from './uitl/validate-pkg'
+import { validateNpmName } from './util/validate-pkg'
+import { createApp } from './create-app'
 
 const currentNodeVersion = process.versions.node
 const requireVersion = packageJson.engines.node
 
-if (!Semver.satisfies(currentNodeVersion, requireVersion)) {
+if (!semver.satisfies(currentNodeVersion, requireVersion)) {
   console.error(
     'You are running Node ' +
       currentNodeVersion +
       '.\n' +
-      'Create Crx App requires Node 12 or higher for Node LTS Versions \n' +
+      'Create Crx App requires Node 12 or higher for Node LTS Versions reason \n' +
       'Please update your version of Node.',
   )
   process.exit(1)
@@ -22,7 +23,7 @@ if (!Semver.satisfies(currentNodeVersion, requireVersion)) {
 
 let projectPath = ''
 
-const program = new Commander.Command(packageJson.name)
+const program: any = new Commander.Command(packageJson.name)
   .version(packageJson.version)
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
@@ -48,7 +49,7 @@ const program = new Commander.Command(packageJson.name)
     `
 
   An template to bootstrap the app with. You can use a template name
-  to generator Crx App
+  to generator Chrome Extension App
 `,
   )
   .allowUnknownOption()
@@ -63,7 +64,7 @@ async function run(): Promise<void> {
     const res = await prompts({
       type: 'text',
       name: 'path',
-      message: 'Input your project name?',
+      message: 'Input your project name',
       initial: 'my-app',
       validate: (name) => {
         const validation = validateNpmName(path.basename(path.resolve(name)))
@@ -88,6 +89,27 @@ async function run(): Promise<void> {
     console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-crx-app')}`)
     console.log()
     console.log(`Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`)
+    process.exit(1)
+  }
+
+  const root = path.resolve(projectPath)
+  const appName = path.basename(root)
+
+  const { valid, problems } = validateNpmName(appName)
+  if (!valid) {
+    console.error(
+      `Could not create a project called ${chalk.red(
+        `"${appName}"`,
+      )} because of npm naming restrictions:`,
+    )
+
+    problems!.forEach((p) => console.error(`    ${chalk.red.bold('*')} ${p}`))
+    process.exit(1)
+  }
+
+  try {
+    createApp({ root, appName, useNpm: !!program.useNpm })
+  } catch (reason) {
     process.exit(1)
   }
 }

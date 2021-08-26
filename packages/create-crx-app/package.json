@@ -1,0 +1,23 @@
+{
+  "name": "create-crx-app",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/Jcanno/create-crx-app.git",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "bin": {
+    "create-crx-app": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.0.14",
+    "@types/validate-npm-package-name": "^3.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "chalk": "^4.1.1",
+    "commander": "^8.1.0",
+    "prompts": "^2.4.1",
+    "validate-npm-package-name": "^3.0.0"
+  }
+}
