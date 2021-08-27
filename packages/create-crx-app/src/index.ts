@@ -108,7 +108,7 @@ async function run(): Promise<void> {
   }
 
   try {
-    createApp({ root, appName, useNpm: !!program.useNpm })
+    await createApp({ root, appName, useNpm: !!program.useNpm })
   } catch (reason) {
     process.exit(1)
   }

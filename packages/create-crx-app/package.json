@@ -1,7 +1,14 @@
 {
   "name": "create-crx-app",
   "version": "0.1.0",
-  "main": "index.js",
+  "keywords": [
+    "Chrome Extension",
+    "crx"
+  ],
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "description": "Create Chrome Extension apps with one command",
   "repository": "https://github.com/Jcanno/create-crx-app.git",
   "license": "MIT",
   "engines": {
@@ -10,13 +17,21 @@
   "bin": {
     "create-crx-app": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/node": "^16.7.2",
     "@types/prompts": "^2.0.14",
     "@types/validate-npm-package-name": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
-    "@typescript-eslint/parser": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5"
+  },
+  "dependencies": {
     "chalk": "^4.1.1",
     "commander": "^8.1.0",
+    "cross-spawn": "^7.0.3",
     "prompts": "^2.4.1",
     "validate-npm-package-name": "^3.0.0"
   }

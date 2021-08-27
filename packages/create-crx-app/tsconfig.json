@@ -1,11 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "moduleResolution": "node",
-    "strict": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": false
-  },
-  "exclude": ["templates", "dist"]
+  "extends": "../../tsconfig.json",
+  "include": ["./src/*"]
 }
