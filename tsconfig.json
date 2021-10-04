@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "ES5",
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
