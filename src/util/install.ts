@@ -32,6 +32,7 @@ export function install(
         args.push(...dependencies)
       }
     } else {
+      // run `command` install with no dependencies
       args = ['install']
       if (useYarn) {
         if (!isOnline) {

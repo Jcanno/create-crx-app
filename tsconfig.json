@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES5",
+    "lib": ["ES2015"],
+    "outDir": "./dist",
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": false,
-    "allowSyntheticDefaultImports": true
   },
+  "include": ["./src/*"],
   "exclude": ["templates", "dist"]
 }

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+import { templates } from './util/template'
 import packageJson from '../package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -22,6 +24,7 @@ if (!semver.satisfies(currentNodeVersion, requireVersion)) {
 }
 
 let projectPath = ''
+let templateName = ''
 
 const program: any = new Commander.Command(packageJson.name)
   .version(packageJson.version)
@@ -30,13 +33,13 @@ const program: any = new Commander.Command(packageJson.name)
   .action((name) => {
     projectPath = name
   })
-  .option(
-    '--ts, --typescript',
-    `
+  //   .option(
+  //     '--ts, --typescript',
+  //     `
 
-  Initialize as a TypeScript project.
-`,
-  )
+  //   Initialize as a TypeScript project.
+  // `,
+  // )
   .option(
     '--use-npm',
     `
@@ -48,8 +51,11 @@ const program: any = new Commander.Command(packageJson.name)
     '-t, --template [name]',
     `
 
-  An template to bootstrap the app with. You can use a template name
-  to generator Chrome Extension App
+  An template to bootstrap the app with.
+  Must be one of
+    react-ts-v2
+  You can choose a template name to generator Chrome Extension App.
+  Of course, you can choose template by running CLI
 `,
   )
   .allowUnknownOption()
@@ -65,7 +71,7 @@ async function run(): Promise<void> {
       type: 'text',
       name: 'path',
       message: 'Input your project name',
-      initial: 'my-app',
+      initial: 'my-crx-app',
       validate: (name) => {
         const validation = validateNpmName(path.basename(path.resolve(name)))
         if (validation.valid) {
@@ -77,6 +83,33 @@ async function run(): Promise<void> {
 
     if (typeof res.path === 'string') {
       projectPath = res.path.trim()
+    }
+  }
+
+  const options = program.opts()
+
+  if (options.template) {
+    templateName = options.template
+  }
+
+  if (!templates.find((item) => item.title === templateName)) {
+    if (templateName) {
+      console.log()
+      console.log(`Template: ${chalk.cyan(templateName)} is invalid`)
+      console.log(`Please choose a template for your project`)
+      console.log()
+    }
+
+    const res = await prompts({
+      type: 'select',
+      name: 'templateName',
+      message: 'Choose your project template',
+      // initial: 'my-crx-app',
+      choices: templates,
+    })
+
+    if (typeof res.templateName === 'string') {
+      templateName = res.templateName
     }
   }
 
@@ -108,7 +141,7 @@ async function run(): Promise<void> {
   }
 
   try {
-    await createApp({ root, appName, useNpm: !!program.useNpm })
+    await createApp({ root, appName, useNpm: !!program.useNpm, templateName })
   } catch (reason) {
     process.exit(1)
   }
