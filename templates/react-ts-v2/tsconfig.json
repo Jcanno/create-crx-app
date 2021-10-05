@@ -1,0 +1,17 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "noImplicitAny": false,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
