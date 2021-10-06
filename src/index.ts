@@ -33,13 +33,6 @@ const program: any = new Commander.Command(packageJson.name)
   .action((name) => {
     projectPath = name
   })
-  //   .option(
-  //     '--ts, --typescript',
-  //     `
-
-  //   Initialize as a TypeScript project.
-  // `,
-  // )
   .option(
     '--use-npm',
     `
@@ -104,7 +97,6 @@ async function run(): Promise<void> {
       type: 'select',
       name: 'templateName',
       message: 'Choose your project template',
-      // initial: 'my-crx-app',
       choices: templates,
     })
 

@@ -46,9 +46,7 @@ export function isFolderEmpty(root: string, name: string): boolean {
       }
     }
     console.log()
-    console.log(
-      'Either try using a new directory name, or remove the files listed above.',
-    )
+    console.log('Either try using a new directory name, or remove the files listed above.')
     console.log()
     return false
   }
