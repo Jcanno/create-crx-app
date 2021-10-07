@@ -2,6 +2,7 @@
   "name": "create-crx-app",
   "version": "0.0.1",
   "scripts": {
+    "prebuild": "rm -rf dist",
     "build": "tsc"
   },
   "keywords": [
