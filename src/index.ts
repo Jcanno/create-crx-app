@@ -23,10 +23,11 @@ if (!semver.satisfies(currentNodeVersion, requireVersion)) {
   process.exit(1)
 }
 
+const packageName = packageJson.name
 let projectPath = ''
 let templateName = ''
 
-const program: any = new Commander.Command(packageJson.name)
+const program = new Commander.Command(packageName)
   .version(packageJson.version)
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
@@ -44,39 +45,29 @@ const program: any = new Commander.Command(packageJson.name)
     '-t, --template [name]',
     `
 
-  An template to bootstrap the app with.
+  Tell the CLI to generate project with a template.
   Must be one of
     react-ts-v2
-  You can choose a template name to generator Chrome Extension App.
-  Of course, you can choose template by running CLI
+  Of course, you can choose template by running CLI, it's optional
 `,
   )
   .allowUnknownOption()
+  .showHelpAfterError(
+    `
+  Please specify the project directory:
+      ${chalk.cyan(packageName)} ${chalk.green('<project-directory>')}
+
+  For example:
+      ${chalk.cyan(packageName)} ${chalk.green('my-next-app')}
+
+  Run ${chalk.cyan(`${packageName} --help`)} to see all options.
+`,
+  )
   .parse(process.argv)
 
 async function run(): Promise<void> {
   if (typeof projectPath === 'string') {
     projectPath = projectPath.trim()
-  }
-
-  if (!projectPath) {
-    const res = await prompts({
-      type: 'text',
-      name: 'path',
-      message: 'Input your project name',
-      initial: 'my-crx-app',
-      validate: (name) => {
-        const validation = validateNpmName(path.basename(path.resolve(name)))
-        if (validation.valid) {
-          return true
-        }
-        return 'Invalid project name: ' + validation.problems![0]
-      },
-    })
-
-    if (typeof res.path === 'string') {
-      projectPath = res.path.trim()
-    }
   }
 
   const options = program.opts()
