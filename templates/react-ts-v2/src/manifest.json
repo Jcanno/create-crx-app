@@ -6,23 +6,15 @@
 	"browser_action": {
 		"default_title": "react-chrome-extension",
 		"default_icon": "assets/logo.png",
-		"default_popup": "popup/index.html"
+		"default_popup": "pages/popup.html"
 	},
 	"permissions": [
-		"webRequestBlocking",
-		"notifications",
-		"tabs",
-		"webRequest",
-		"http://*/",
-		"https://*/",
 		"<all_urls>",
-		"storage",
-		"activeTab"
+		"storage"
 	],
 	"background": {
-		"scripts": ["background/index.js"]
+		"scripts": ["js/background.js"]
 	},
-	"devtools_page": "devtools/index.html",
 	"icons": {
 		"16": "assets/logo.png",
 		"48": "assets/logo.png",
@@ -31,12 +23,13 @@
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"content_scripts": [{
 		"matches": [
-			"https://www.google.com/"
+			"*://*/*"
 		],
 		"js": [
-			"content/index.js"
+			"js/content.js"
 		],
 		"run_at": "document_end"
 	}],
-	"web_accessible_resources": ["inject/index.js"]
+	"options_page": "pages/options.html",
+	"web_accessible_resources": ["assets/*"]
 }

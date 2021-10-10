@@ -1,7 +1,7 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "target": "ES5",
+    "lib": ["ESNext", "DOM"],
     "module": "commonjs",
     "esModuleInterop": true,
     "jsx": "react",

@@ -1,5 +1,6 @@
 chrome.runtime.onInstalled.addListener((installedDetails) => {
-  if (installedDetails.reason === 'install') {
-    console.log('chrome extension install success')
+  // emit in every reload
+  if (installedDetails.reason === 'update') {
+    console.log('chrome extension update success')
   }
 })

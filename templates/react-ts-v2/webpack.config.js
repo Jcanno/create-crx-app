@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const outputPath = path.resolve(__dirname, 'dist')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -25,31 +24,24 @@ const copyFiles = [
 // all script entry
 // custom by your need
 const entries = {
-  'popup/index': './src/popup/index.tsx',
-  'devtools/index': './src/devtools/index.tsx',
-  'inject/index': './src/inject/index.ts',
-  'content/index': './src/content/index.tsx',
-  'background/index': './src/background/index.ts',
-  'devtools/panel': './src/devtools/panel.tsx',
+  'js/popup': './src/popup/index.tsx',
+  'js/content': './src/content/index.tsx',
+  'js/background': './src/background/index.ts',
+  'js/options': './src/options/index.tsx',
 }
 
 // page with html
 // custom by your need
 const pages = [
   new HtmlWebpackPlugin({
-    filename: 'popup/index.html',
-    template: 'src/popup/index.html',
-    chunks: ['popup/index'],
+    filename: 'pages/popup.html',
+    template: 'pages/popup.html',
+    chunks: ['js/popup'],
   }),
   new HtmlWebpackPlugin({
-    filename: 'devtools/index.html',
-    template: 'src/devtools/index.html',
-    chunks: ['devtools/index'],
-  }),
-  new HtmlWebpackPlugin({
-    filename: 'devtools/panel.html',
-    template: 'src/devtools/panel.html',
-    chunks: ['devtools/panel'],
+    filename: 'pages/options.html',
+    template: 'pages/options.html',
+    chunks: ['js/options'],
   }),
 ]
 
@@ -64,8 +56,27 @@ const hotReload = isDev
     ]
   : []
 
+const terser = isDev
+  ? []
+  : [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ]
+
+const babelOptions = {
+  cacheDirectory: true,
+  presets: ['@babel/preset-react', ['@babel/preset-env']],
+}
+
 module.exports = {
   mode: isDev ? 'development' : 'production',
+  // mode: 'development',
   entry: entries,
   output: {
     path: outputPath,
@@ -78,22 +89,20 @@ module.exports = {
         test: /\.js$/,
         use: {
           loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
+          options: babelOptions,
         },
         exclude: /node_modules/,
       },
       {
-        test: /\.tsx?$/,
+        test: /\.ts(x?)$/,
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-            },
+            options: babelOptions,
           },
-          'ts-loader',
+          {
+            loader: 'ts-loader',
+          },
         ],
         exclude: /node_modules/,
       },
@@ -110,49 +119,28 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.less$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     ...pages,
     ...hotReload,
     new CopyWebpackPlugin({
       patterns: copyFiles,
     }),
     new WebpackBar(),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[name].css',
-    }),
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', 'less'],
   },
   optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-      }),
-    ],
+    minimize: !isDev,
+    minimizer: terser,
   },
 }
