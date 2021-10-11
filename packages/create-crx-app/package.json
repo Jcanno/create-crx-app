@@ -1,0 +1,52 @@
+{
+  "name": "create-crx-app",
+  "version": "0.0.1",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc"
+  },
+  "keywords": [
+    "Chrome Extension",
+    "crx",
+    "extension",
+    "chrome"
+  ],
+  "bin": {
+    "create-crx-app": "./dist/src/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "description": "Create Chrome Extension apps with one command",
+  "repository": "https://github.com/Jcanno/create-crx-app.git",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/got": "^9.6.12",
+    "@types/node": "^16.7.2",
+    "@types/prompts": "^2.0.14",
+    "@types/semver": "^7.3.8",
+    "@types/tar": "^4.0.5",
+    "@types/validate-npm-package-name": "^3.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "commander": "^8.1.0",
+    "cross-spawn": "^7.0.3",
+    "got": "^11.8.2",
+    "prompts": "^2.4.1",
+    "semver": "^7.3.5",
+    "tar": "^6.1.11",
+    "validate-npm-package-name": "^3.0.0"
+  }
+}
