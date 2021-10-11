@@ -14,10 +14,21 @@ interface CreateApp {
   root: string
   appName: string
   useNpm: boolean
-  templateName: string
+  useTypescript: boolean
+  useFramework: string
+  useMv: string
 }
 
-export async function createApp({ root, appName, useNpm, templateName }: CreateApp): Promise<void> {
+export async function createApp({
+  root,
+  appName,
+  useNpm,
+  useTypescript,
+  useFramework,
+  useMv,
+}: CreateApp): Promise<void> {
+  const templateName = `${useFramework}-${useTypescript ? 'ts' : 'js'}-${useMv}`.toLowerCase()
+
   if (!(await isWriteable(path.dirname(root)))) {
     console.error(
       'The application path is not writable, please check folder permissions and try again.',

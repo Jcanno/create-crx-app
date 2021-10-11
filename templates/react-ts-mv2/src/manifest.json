@@ -1,16 +1,15 @@
 {
 	"manifest_version": 2,
-	"name": "react-chrome-extension",
+	"name": "react-ts-mv2",
 	"description": "chrome extension for react",
 	"version": "1.0.0",
 	"browser_action": {
-		"default_title": "react-chrome-extension",
+		"default_title": "react-ts-mv2",
 		"default_icon": "assets/logo.png",
 		"default_popup": "pages/popup.html"
 	},
 	"permissions": [
-		"<all_urls>",
-		"storage"
+		"<all_urls>"
 	],
 	"background": {
 		"scripts": ["js/background.js"]

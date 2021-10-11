@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { templates } from './src/util/template'
+import { extLanguages, frameworks, mvVersions } from './src/util/template'
 import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -25,7 +25,9 @@ if (!semver.satisfies(currentNodeVersion, requireVersion)) {
 
 const packageName = packageJson.name
 let projectPath = ''
-let templateName = ''
+let useFramework = ''
+let useTypescript = false
+let useMv = ''
 
 const program = new Commander.Command(packageName)
   .version(packageJson.version)
@@ -42,13 +44,24 @@ const program = new Commander.Command(packageName)
 `,
   )
   .option(
-    '-t, --template [name]',
+    '--ts, --typescript',
     `
 
-  Tell the CLI to generate project with a template.
-  Must be one of
-    react-ts-v2
-  Of course, you can choose template by running CLI, it's optional
+  Explicitly tell the CLI to generate project with TypeScript.
+`,
+  )
+  .option(
+    '--framework [name]',
+    `
+
+  Explicitly Tell the CLI to generate project with Vue or React framework.
+`,
+  )
+  .option(
+    '--mv [name]',
+    `
+
+  Explicitly Tell the CLI to generate project with Chrome Extension Manifest Version, mv2 or mv3.
 `,
   )
   .allowUnknownOption()
@@ -58,7 +71,7 @@ const program = new Commander.Command(packageName)
       ${chalk.cyan(packageName)} ${chalk.green('<project-directory>')}
 
   For example:
-      ${chalk.cyan(packageName)} ${chalk.green('my-next-app')}
+      ${chalk.cyan(packageName)} ${chalk.green('my-crx-app')}
 
   Run ${chalk.cyan(`${packageName} --help`)} to see all options.
 `,
@@ -72,40 +85,56 @@ async function run(): Promise<void> {
 
   const options = program.opts()
 
-  if (options.template) {
-    templateName = options.template
-  }
+  try {
+    useFramework = options.framework
 
-  if (!templates.find((item) => item.title === templateName)) {
-    if (templateName) {
-      console.log()
-      console.log(`Template: ${chalk.cyan(templateName)} is invalid`)
-      console.log(`Please choose a template for your project`)
-      console.log()
+    if (!frameworks.find((item) => item.title === useFramework)) {
+      const res = await prompts(
+        {
+          type: 'select',
+          name: 'framework',
+          message: 'Select your project framework',
+          choices: frameworks,
+        },
+        { onCancel: onPromptCancel },
+      )
+
+      useFramework = res.framework
     }
 
-    const res = await prompts({
-      type: 'select',
-      name: 'templateName',
-      message: 'Choose your project template',
-      choices: templates,
-    })
+    useTypescript = options.typescript
 
-    if (typeof res.templateName === 'string') {
-      templateName = res.templateName
+    if (!options.typescript) {
+      const res = await prompts(
+        {
+          type: 'select',
+          name: 'language',
+          message: 'Select your project language',
+          choices: extLanguages,
+        },
+        { onCancel: onPromptCancel },
+      )
+
+      useTypescript = res.language === 'typescript'
     }
-  }
 
-  if (!projectPath) {
-    console.log()
-    console.log('Please specify the project directory:')
-    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`)
-    console.log()
-    console.log('For example:')
-    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-crx-app')}`)
-    console.log()
-    console.log(`Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`)
-    process.exit(1)
+    useMv = options.mv
+
+    if (!mvVersions.find((item) => item.title === useMv)) {
+      const res = await prompts(
+        {
+          type: 'select',
+          name: 'mvVersion',
+          message: 'Select your project with Chrome Extension Manifest Version',
+          choices: mvVersions,
+        },
+        { onCancel: onPromptCancel },
+      )
+
+      useMv = res.mvVersion
+    }
+  } catch (error) {
+    console.log(error)
   }
 
   const root = path.resolve(projectPath)
@@ -124,10 +153,14 @@ async function run(): Promise<void> {
   }
 
   try {
-    await createApp({ root, appName, useNpm: !!options.useNpm, templateName })
+    await createApp({ root, appName, useNpm: !!options.useNpm, useFramework, useTypescript, useMv })
   } catch (reason) {
     process.exit(1)
   }
+}
+
+function onPromptCancel() {
+  process.exit(1)
 }
 
 run()
