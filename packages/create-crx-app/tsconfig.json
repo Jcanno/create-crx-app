@@ -9,6 +9,6 @@
     "esModuleInterop": true,
     "skipLibCheck": false,
   },
-  "include": ["./src/*"],
+  "include": ["./src/*", "index.ts"],
   "exclude": ["templates", "dist"]
 }

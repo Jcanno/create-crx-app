@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import { templates } from './util/template'
-import packageJson from '../package.json'
+import { templates } from './src/util/template'
+import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
 import chalk from 'chalk'
 import prompts from 'prompts'
 import path from 'path'
-import { validateNpmName } from './util/validate-pkg'
-import { createApp } from './create-app'
+import { validateNpmName } from './src/util/validate-pkg'
+import { createApp } from './src/create-app'
 
 const currentNodeVersion = process.versions.node
 const requireVersion = packageJson.engines.node

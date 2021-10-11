@@ -12,7 +12,7 @@
     "chrome"
   ],
   "bin": {
-    "create-crx-app": "./dist/src/index.js"
+    "create-crx-app": "./dist/index.js"
   },
   "files": [
     "dist"
