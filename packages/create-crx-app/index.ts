@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { extLanguages, frameworks, mvVersions } from './src/util/template'
+import { extLanguages, frameworks, mvVersions } from './src/util/promptsOpts'
 import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -88,7 +88,7 @@ async function run(): Promise<void> {
   try {
     useFramework = options.framework
 
-    if (!frameworks.find((item) => item.title === useFramework)) {
+    if (!frameworks.find((item) => item.title.toLowerCase() === useFramework.toLowerCase())) {
       const res = await prompts(
         {
           type: 'select',
@@ -115,7 +115,7 @@ async function run(): Promise<void> {
         { onCancel: onPromptCancel },
       )
 
-      useTypescript = res.language === 'typescript'
+      useTypescript = res.language === 'ts'
     }
 
     useMv = options.mv
