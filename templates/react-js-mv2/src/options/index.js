@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom'
 import React, { useCallback } from 'react'
 import '../style/options.less'
 
@@ -18,4 +19,9 @@ function App() {
   )
 }
 
-export default App
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root'),
+)

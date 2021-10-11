@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const outputPath = path.resolve(__dirname, 'dist')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -24,10 +23,10 @@ const copyFiles = [
 // all script entry
 // custom by your need
 const entries = {
-  'js/popup': './src/popup/index.tsx',
-  'js/content': './src/content/index.tsx',
-  'js/background': './src/background/index.ts',
-  'js/options': './src/options/index.tsx',
+  'js/popup': './src/popup/index.js',
+  'js/content': './src/content/index.js',
+  'js/background': './src/background/index.js',
+  'js/options': './src/options/index.js',
 }
 
 // page with html
@@ -93,19 +92,6 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.ts(x?)$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babelOptions,
-          },
-          {
-            loader: 'ts-loader',
-          },
-        ],
-        exclude: /node_modules/,
-      },
-      {
         test: /\.(png|jpg|gif|svg|ttf|eot|woff|otf)$/,
         use: [
           {
@@ -136,7 +122,7 @@ module.exports = {
     new WebpackBar(),
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', 'less'],
+    extensions: ['.js', 'less'],
   },
   optimization: {
     minimize: !isDev,

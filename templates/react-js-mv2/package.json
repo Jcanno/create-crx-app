@@ -1,0 +1,41 @@
+{
+  "name": "react-js-mv2",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack --watch --no-stats",
+    "crx": "crx pack dist"
+  },
+  "dependencies": {
+    "less": "^4.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/eslint-parser": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^8.1.1",
+    "cross-env": "^7.0.3",
+    "crx": "^5.0.1",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "less-loader": "^8.1.1",
+    "prettier": "^2.2.1",
+    "style-loader": "^3.3.0",
+    "terser-webpack-plugin": "^5.1.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.35.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-ext-reloader": "^1.1.8",
+    "webpackbar": "^5.0.0-3"
+  }
+}
