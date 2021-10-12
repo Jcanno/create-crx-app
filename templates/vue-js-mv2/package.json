@@ -1,0 +1,52 @@
+{
+  "name": "vue-js-mv2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service build --watch",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "less": "^4.1.2",
+    "vue": "^3.2.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0-beta.5",
+    "@vue/cli-plugin-eslint": "~5.0.0-beta.5",
+    "@vue/cli-service": "~5.0.0-beta.5",
+    "@vue/compiler-sfc": "^3.2.6",
+    "copy-webpack-plugin": "6",
+    "crx": "^5.0.1",
+    "eslint": "^7.20.0",
+    "eslint-plugin-vue": "^7.2.0",
+    "less-loader": "^10.1.0",
+    "webpack-ext-reloader": "^1.1.8"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "globals": {
+      "chrome": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

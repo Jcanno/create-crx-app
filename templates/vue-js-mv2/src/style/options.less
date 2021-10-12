@@ -1,0 +1,56 @@
+@import '../style/btn.less';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  .title {
+    font-size: 54px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: transparent;
+    background: linear-gradient(45deg, #ffeb3b, #009688, yellowgreen, pink, #03a9f4, #9c27b0, #8bc34a);
+    background-size: cover;
+    background-position: center center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: huerotate 3s infinite;
+    user-select: none;
+  }
+
+  .start {
+    .crx-btn();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    width: 230px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+  }
+
+  .start:hover {
+    background-color: #394eea !important;
+  }
+
+  .arrow {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-top: 3px solid #fff;
+    border-left: 3px solid #fff;
+    transform: rotate(135deg)
+  }
+}
+
+@keyframes huerotate {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
