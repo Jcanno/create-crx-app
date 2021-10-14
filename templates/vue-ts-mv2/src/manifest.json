@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "vue-ts-mv2",
+  "description": "chrome extension for vue",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_title": "vue-ts-mv2",
+    "default_icon": "assets/logo.png",
+    "default_popup": "pages/popup.html"
+  },
+  "permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "16": "assets/logo.png",
+    "48": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [{
+    "matches": [
+      "*://*/*"
+    ],
+    "js": [
+      "content.js"
+    ],
+    "run_at": "document_end"
+  }],
+  "options_page": "pages/options.html",
+  "web_accessible_resources": ["assets/*"]
+}
