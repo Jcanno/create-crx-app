@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { extLanguages, frameworks, mvVersions } from './src/util/promptsOpts'
+import { extLanguages, frameworks, mvVersions } from './src/util/prompts-opts'
 import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -85,56 +85,52 @@ async function run(): Promise<void> {
 
   const options = program.opts()
 
-  try {
-    useFramework = options.framework
+  useFramework = options.framework
 
-    if (!frameworks.find((item) => item.title.toLowerCase() === useFramework.toLowerCase())) {
-      const res = await prompts(
-        {
-          type: 'select',
-          name: 'framework',
-          message: 'Select your project framework',
-          choices: frameworks,
-        },
-        { onCancel: onPromptCancel },
-      )
+  if (!frameworks.find((item) => item.title.toLowerCase() === useFramework?.toLowerCase())) {
+    const res = await prompts(
+      {
+        type: 'select',
+        name: 'framework',
+        message: 'Select your project framework',
+        choices: frameworks,
+      },
+      { onCancel: onPromptCancel },
+    )
 
-      useFramework = res.framework
-    }
+    useFramework = res.framework
+  }
 
-    useTypescript = options.typescript
+  useTypescript = options.typescript
 
-    if (!options.typescript) {
-      const res = await prompts(
-        {
-          type: 'select',
-          name: 'language',
-          message: 'Select your project language',
-          choices: extLanguages,
-        },
-        { onCancel: onPromptCancel },
-      )
+  if (!options.typescript) {
+    const res = await prompts(
+      {
+        type: 'select',
+        name: 'language',
+        message: 'Select your project language',
+        choices: extLanguages,
+      },
+      { onCancel: onPromptCancel },
+    )
 
-      useTypescript = res.language === 'ts'
-    }
+    useTypescript = res.language === 'ts'
+  }
 
-    useMv = options.mv
+  useMv = options.mv
 
-    if (!mvVersions.find((item) => item.title === useMv)) {
-      const res = await prompts(
-        {
-          type: 'select',
-          name: 'mvVersion',
-          message: 'Select your project with Chrome Extension Manifest Version',
-          choices: mvVersions,
-        },
-        { onCancel: onPromptCancel },
-      )
+  if (!mvVersions.find((item) => item.title === useMv)) {
+    const res = await prompts(
+      {
+        type: 'select',
+        name: 'mvVersion',
+        message: 'Select your project with Chrome Extension Manifest Version',
+        choices: mvVersions,
+      },
+      { onCancel: onPromptCancel },
+    )
 
-      useMv = res.mvVersion
-    }
-  } catch (error) {
-    console.log(error)
+    useMv = res.mvVersion
   }
 
   const root = path.resolve(projectPath)
