@@ -6,6 +6,13 @@
     "packages/*",
     "templates/*"
   ],
+  "scripts": {
+    "build": "yarn workspace create-crx-app build",
+    "run-react-ts": "yarn workspace react-ts-mv2 dev",
+    "run-react-js": "yarn workspace react-js-mv2 dev",
+    "run-vue-ts": "yarn workspace vue-ts-mv2 serve",
+    "run-vue-js": "yarn workspace vue-js-mv2 serve"
+  },
   "repository": "https://github.com/Jcanno/create-crx-app.git",
   "license": "MIT"
 }
