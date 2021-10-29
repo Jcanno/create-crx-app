@@ -16,7 +16,6 @@ interface CreateApp {
   useNpm: boolean
   useTypescript: boolean
   useFramework: string
-  useMv: string
 }
 
 export async function createApp({
@@ -25,9 +24,8 @@ export async function createApp({
   useNpm,
   useTypescript,
   useFramework,
-  useMv,
 }: CreateApp): Promise<void> {
-  const templateName = `${useFramework}-${useTypescript ? 'ts' : 'js'}-${useMv}`.toLowerCase()
+  const templateName = `${useFramework}-${useTypescript ? 'ts' : 'js'}-mv2`.toLowerCase()
 
   if (!(await isWriteable(path.dirname(root)))) {
     console.error(

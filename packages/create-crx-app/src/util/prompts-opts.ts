@@ -7,5 +7,3 @@ export const frameworks = [
   { title: 'React', value: 'react' },
   { title: 'Vue', value: 'vue' },
 ]
-
-export const mvVersions = [{ title: 'mv2', value: 'mv2' }]

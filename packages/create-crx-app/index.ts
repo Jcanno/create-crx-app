@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { extLanguages, frameworks, mvVersions } from './src/util/prompts-opts'
+import { extLanguages, frameworks } from './src/util/prompts-opts'
 import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -27,7 +27,6 @@ const packageName = packageJson.name
 let projectPath = ''
 let useFramework = ''
 let useTypescript = false
-let useMv = ''
 
 const program = new Commander.Command(packageName)
   .version(packageJson.version)
@@ -55,13 +54,6 @@ const program = new Commander.Command(packageName)
     `
 
   Explicitly Tell the CLI to generate project with Vue or React framework.
-`,
-  )
-  .option(
-    '--mv [name]',
-    `
-
-  Explicitly Tell the CLI to generate project with Chrome Extension Manifest Version, mv2 or mv3.
 `,
   )
   .allowUnknownOption()
@@ -117,22 +109,6 @@ async function run(): Promise<void> {
     useTypescript = res.language === 'ts'
   }
 
-  useMv = options.mv
-
-  if (!mvVersions.find((item) => item.title === useMv)) {
-    const res = await prompts(
-      {
-        type: 'select',
-        name: 'mvVersion',
-        message: 'Select your project with Chrome Extension Manifest Version',
-        choices: mvVersions,
-      },
-      { onCancel: onPromptCancel },
-    )
-
-    useMv = res.mvVersion
-  }
-
   const root = path.resolve(projectPath)
   const appName = path.basename(root)
 
@@ -149,7 +125,7 @@ async function run(): Promise<void> {
   }
 
   try {
-    await createApp({ root, appName, useNpm: !!options.useNpm, useFramework, useTypescript, useMv })
+    await createApp({ root, appName, useNpm: !!options.useNpm, useFramework, useTypescript })
   } catch (reason) {
     process.exit(1)
   }
