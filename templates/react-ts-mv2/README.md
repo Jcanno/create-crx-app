@@ -1,4 +1,4 @@
-# react-chrome-extension
+# react-ts-mv2
 
 ## Install
 

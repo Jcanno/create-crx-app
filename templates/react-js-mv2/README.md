@@ -1,4 +1,4 @@
-# react-chrome-extension
+# react-js-mv2
 
 ## Install
 
