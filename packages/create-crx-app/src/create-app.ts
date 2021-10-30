@@ -1,12 +1,11 @@
 import { isWriteable } from './util/is-writeable'
 import path from 'path'
-import fs from 'fs'
-import os from 'os'
 import { makeDir } from './util/make-dir'
 import { isFolderEmpty } from './util/is-empty-folder'
 import { getOnline } from './util/is-online'
 import { install } from './util/install'
 import { shouldUseYarn } from './util/should-use-yarn'
+import { rewriteFile } from './util/rewrite-file'
 import { downloadAndExtractExample } from './util/download'
 import chalk from 'chalk'
 
@@ -60,12 +59,16 @@ export async function createApp({
 
   console.log(chalk.bold(`Using ${displayedCommand}.`))
 
-  const tarnetPackageJson = fs.readFileSync('package.json')
-  const modifiedPackageJson = Object.assign(JSON.parse(tarnetPackageJson.toString()), {
+  rewriteFile('package.json', {
     name: appName,
   })
-
-  fs.writeFileSync('package.json', JSON.stringify(modifiedPackageJson, null, 2) + os.EOL)
+  rewriteFile('src/manifest.json', {
+    name: appName,
+    browser_action: {
+      default_title: appName,
+    },
+  })
+  rewriteFile('README.md', appName, templateName)
   const installFlags = { useYarn, isOnline }
 
   console.log()
