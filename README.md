@@ -1,4 +1,4 @@
-<h1 align="center"><img height="150" src="./templates/react-js-mv2/assets/create-crx-app.png" /><br> </h1>
+<h1 align="center"><img height="150" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/create-crx-app.png" /><br> </h1>
 
 <h3 align="center">CLI for create Chrome extension app</h3>
 
@@ -16,10 +16,10 @@ We can easily generate a Chrome extension project by using create-crx-app step b
 
 Select your project framework:
 
-<img height="150" width="400" src="./example/img/framework.png" />
+<img height="150" width="400" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/framework.png" />
 
 Select your project language:
 
-<img height="150" width="400" src="./example/img/lang.png" />
+<img height="150" width="400" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/lang.png" />
 
 After that, create-crx-app will generate project by your setting.

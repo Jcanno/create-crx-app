@@ -1,4 +1,4 @@
-<h1 align="center"><img height="150" src="./templates/react-js-mv2/assets/create-crx-app.png" /><br> </h1>
+<h1 align="center"><img height="150" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/create-crx-app.png" /><br> </h1>
 
 <h3 align="center">CLI for create Chrome extension app</h3>
 
@@ -16,10 +16,10 @@ npm run dev
 
 选择你的项目框架:
 
-<img height="150" width="400" src="./example/img/framework.png" />
+<img height="150" width="400" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/framework.png" />
 
 选择你的项目语言:
 
-<img height="150" width="400" src="./example/img/lang.png" />
+<img height="150" width="400" src="https://raw.githubusercontent.com/Jcanno/images/master/create-crx-app/lang.png" />
 
 create-crx-app 将会按照你的所有配置生成项目
