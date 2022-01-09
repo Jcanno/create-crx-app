@@ -11,7 +11,9 @@
     "run-react-ts": "yarn workspace react-ts-mv2 dev",
     "run-react-js": "yarn workspace react-js-mv2 dev",
     "run-vue-ts": "yarn workspace vue-ts-mv2 serve",
-    "run-vue-js": "yarn workspace vue-js-mv2 serve"
+    "run-vue-js": "yarn workspace vue-js-mv2 serve",
+    "prepublish": "yarn run build",
+    "publish": "cd packages/create-crx-app && npm publish"
   },
   "repository": "https://github.com/Jcanno/create-crx-app.git",
   "license": "MIT"

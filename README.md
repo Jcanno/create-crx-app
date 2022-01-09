@@ -2,7 +2,7 @@
 
 <h3 align="center">CLI for create Chrome extension app</h3>
 
-English|[简体中文](https://github.com/Jcanno/create-crx-app/blob/main/README-CH.md)
+English|[简体中文](https://github.com/Jcanno/create-crx-app/blob/main/README.zh-CN.md)
 
 we recommend to type code below in terminal with npm 5.2+ and higher:
 
