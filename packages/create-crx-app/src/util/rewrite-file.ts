@@ -2,7 +2,6 @@ import fs from 'fs'
 import os from 'os'
 import { extname } from 'path'
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 function shallowCopy(source: Record<string, any>, copy: Record<string, any>) {
   const result = {} as Record<string, any>
   Object.keys(source).forEach((key) => {
@@ -25,7 +24,6 @@ export function rewriteFile(filePath: string, replacer: string | object, source?
 
   if (isJson) {
     const targetJson = JSON.parse(targetContent)
-    // const modifiedContent = Object.assign({}, targetJson, replacer)
     // eslint-disable-next-line @typescript-eslint/ban-types
     const modifiedContent = shallowCopy(targetJson, replacer as object)
     fs.writeFileSync(filePath, JSON.stringify(modifiedContent, null, 2) + os.EOL)

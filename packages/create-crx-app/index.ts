@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { extLanguages, frameworks } from './src/util/prompts-opts'
+import { EXTLANGUAGES, FRAMEWORKS } from './src/util/prompts-opts'
 import packageJson from './package.json'
 import semver from 'semver'
 import Commander from 'commander'
@@ -79,13 +79,13 @@ async function run(): Promise<void> {
 
   useFramework = options.framework
 
-  if (!frameworks.find((item) => item.title.toLowerCase() === useFramework?.toLowerCase())) {
+  if (!FRAMEWORKS.find((item) => item.title.toLowerCase() === useFramework?.toLowerCase())) {
     const res = await prompts(
       {
         type: 'select',
         name: 'framework',
         message: 'Select your project framework',
-        choices: frameworks,
+        choices: FRAMEWORKS,
       },
       { onCancel: onPromptCancel },
     )
@@ -101,7 +101,7 @@ async function run(): Promise<void> {
         type: 'select',
         name: 'language',
         message: 'Select your project language',
-        choices: extLanguages,
+        choices: EXTLANGUAGES,
       },
       { onCancel: onPromptCancel },
     )
