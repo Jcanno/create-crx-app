@@ -1,6 +1,6 @@
 {
   "name": "create-crx-app",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc"
@@ -18,7 +18,11 @@
     "dist"
   ],
   "description": "Create Chrome Extension apps with one command",
-  "repository": "https://github.com/Jcanno/create-crx-app.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jcanno/create-crx-app.git",
+    "directory": "packages/create-crx-app"
+  },
   "bugs": {
     "url": "https://github.com/Jcanno/create-crx-app/issues"
   },
