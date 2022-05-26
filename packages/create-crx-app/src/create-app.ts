@@ -84,10 +84,12 @@ export async function createApp({
     cdpath = root
   }
 
+  const startServeCommand = useFramework === 'react' ? 'dev' : 'serve'
+
   console.log(`${chalk.green('Success!')} Created ${appName} at ${root}`)
   console.log('Inside that directory, you can run several commands:')
   console.log()
-  console.log(chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}dev`))
+  console.log(chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}${startServeCommand}`))
   console.log('    Starts the development server.')
   console.log()
   console.log(chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`))
@@ -96,6 +98,6 @@ export async function createApp({
   console.log('We suggest that you begin by typing:')
   console.log()
   console.log(chalk.cyan('  cd'), cdpath)
-  console.log(`  ${chalk.cyan(`${displayedCommand} ${useYarn ? '' : 'run '}dev`)}`)
+  console.log(`  ${chalk.cyan(`${displayedCommand} ${useYarn ? '' : 'run '}${startServeCommand}`)}`)
   console.log()
 }

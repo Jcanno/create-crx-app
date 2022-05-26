@@ -1,6 +1,6 @@
 {
   "name": "create-crx-app",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc"
